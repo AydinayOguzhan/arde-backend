@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concrete;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,11 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 {
     public class EfContext : DbContext
     {
-        public EfContext(DbContextOptions<EfContext> options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(@"Server=.;Database=ArdeDB; Trusted_Connection=True; TrustServerCertificate=True");
         }
 
-        public EfContext()
-        {
-        }
 
         public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
@@ -27,5 +26,6 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceProduct> InvoiceProducts { get; set; }
         public DbSet<Product> Products { get; set; }
+
     }
 }
