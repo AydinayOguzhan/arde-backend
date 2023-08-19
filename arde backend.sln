@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Business", "Business\Business.csproj", "{059AF4CE-0A16-4860-AEE3-285BB5BF5394}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FF5819CF-3931-4EEC-8AD2-5BA4C29D3C84} = {FF5819CF-3931-4EEC-8AD2-5BA4C29D3C84}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{EB46D1E1-3569-4C45-A9DF-DAE5FD4E4E74}"
 EndProject
@@ -12,6 +15,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{96E51559-AFD9-4657-9B87-67EEE361CDD5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "WebAPI\WebAPI.csproj", "{82132B25-98A8-4668-8FE2-ECD2B08C2B4B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{059AF4CE-0A16-4860-AEE3-285BB5BF5394} = {059AF4CE-0A16-4860-AEE3-285BB5BF5394}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
