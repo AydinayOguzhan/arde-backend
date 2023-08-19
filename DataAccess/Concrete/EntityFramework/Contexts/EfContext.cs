@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +14,14 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public EfContext(DbContextOptions<EfContext> options) : base(options)
         {
         }
+
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<InvoiceProduct> InvoiceProducts { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
