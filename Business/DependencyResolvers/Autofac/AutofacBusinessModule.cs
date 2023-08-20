@@ -35,6 +35,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserOperationClaimDal>().As<IUserOperationClaimDal>();
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
 
+            builder.RegisterType<UserDal>().As<IUserDal>();
+            builder.RegisterType<UserManager>().As<IUserService>();
+
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
