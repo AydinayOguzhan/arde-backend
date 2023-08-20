@@ -11,5 +11,6 @@ namespace Business.Abstract
     public interface ICurrencyService
     {
         IDataResult<IList<Currency>> GetAll();
+        IDataResult<Currency> GetByName(string name);
     }
 }

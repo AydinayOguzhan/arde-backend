@@ -15,5 +15,7 @@ namespace Business.Constants
         public static string AuthorizationDenied = "Yetkilendirme reddedildi";
         public static string PasswordError = "Email veya şifre yanlış";
         public static string SuccessfulLogin = "Gîriş başarılı";
+        public static string InvoiceNotFound = "Fatura bulunamadı";
+        public static string NoProductsFound = "Herhangi bir ürün bulunamadı";
     }
 }

@@ -24,5 +24,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<IList<Currency>>(_currencyDal.GetList());
         }
+
+        public IDataResult<Currency> GetByName(string name)
+        {
+            return new SuccessDataResult<Currency>(_currencyDal.Get(c => c.Name == name));
+        }
     }
 }

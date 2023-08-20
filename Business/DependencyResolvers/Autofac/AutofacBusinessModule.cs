@@ -35,9 +35,17 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<UserOperationClaimDal>().As<IUserOperationClaimDal>();
             builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
 
-            builder.RegisterType<UserDal>().As<IUserDal>();
-            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<CurrencyDal>().As<ICurrencyDal>();
+            builder.RegisterType<CurrencyManager>().As<ICurrencyService>();
 
+            builder.RegisterType<ProductDal>().As<IProductDal>();
+            builder.RegisterType<ProductManager>().As<IProductService>();
+
+            builder.RegisterType<InvoiceDal>().As<IInvoiceDal>();
+            builder.RegisterType<InvoiceManager>().As<IInvoiceService>();
+
+            builder.RegisterType<InvoiceProductDal>().As<IInvoiceProductDal>();
+            builder.RegisterType<InvoiceProductManager>().As<IInvoiceProductService>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
