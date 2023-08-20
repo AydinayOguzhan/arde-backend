@@ -32,7 +32,8 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 
-
+            builder.RegisterType<UserOperationClaimDal>().As<IUserOperationClaimDal>();
+            builder.RegisterType<UserOperationClaimManager>().As<IUserOperationClaimService>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

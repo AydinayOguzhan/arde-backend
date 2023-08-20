@@ -18,11 +18,13 @@ namespace Business.Concrete
     {
         private IUserService _userService;
         private ITokenHelper _tokenHelper;
+        private IUserOperationClaimService _userOperationClaimService;
 
-        public AuthManager(IUserService userService, ITokenHelper tokenHelper)
+        public AuthManager(IUserService userService, ITokenHelper tokenHelper, IUserOperationClaimService userOperationClaimService)
         {
             _userService = userService;
             _tokenHelper = tokenHelper;
+            _userOperationClaimService = userOperationClaimService;
         }
 
         public IDataResult<AccessToken> CreateAccessToken(User user)
@@ -52,7 +54,7 @@ namespace Business.Concrete
         {
             byte[] passwordHash, passwordSalt;
             HashingHelper.CreatePasswordHash(registerDto.Password, out passwordHash, out passwordSalt);
-            User user = new User
+            User newUser = new User
             {
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
@@ -60,8 +62,14 @@ namespace Business.Concrete
                 passwordHash = passwordHash,
                 passwordSalt = passwordSalt
             };
-            _userService.Add(user);
-            return new SuccessDataResult<User>(user, Messages.UserRegistered);
+            _userService.Add(newUser);
+
+            var user = _userService.GetByMail(registerDto.Email);
+            //yetki no 2 => user
+            UserOperationClaim userOperationClaim = new UserOperationClaim { OperationClaimId = 2, UserId = user.Data.Id };
+            _userOperationClaimService.Add(userOperationClaim);
+
+            return new SuccessDataResult<User>(newUser, Messages.UserRegistered);
         }
 
         public IResult UserExists(string email)
