@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.Results.Concrete;
 using Entities.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,7 @@ namespace arde_backend.Controllers
         }
 
         [HttpGet("getalldetailsbyinvoiceid")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetAllDetailsByInvoiceId(int invoiceId)
         {
             var result = _invoiceService.GetAllDetailsByInvoiceId(invoiceId);
@@ -30,6 +32,7 @@ namespace arde_backend.Controllers
         }
 
         [HttpGet("getalllist")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetAllList()
         {
             var result = _invoiceService.GetAllList();
@@ -41,6 +44,7 @@ namespace arde_backend.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(Roles = "admin")]
         public IActionResult Add(InvoiceAddDto invoiceDetail)
         {
             var result = _invoiceService.Add(invoiceDetail);
@@ -52,6 +56,7 @@ namespace arde_backend.Controllers
         }
 
         [HttpDelete("delete")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int invoiceId)
         {
             var result = _invoiceService.Delete(invoiceId);
@@ -63,6 +68,7 @@ namespace arde_backend.Controllers
         }
 
         [HttpPut("update")]
+        [Authorize(Roles = "admin")]
         public IActionResult Update(InvoiceAddDto invoiceDetail)
         {
             var result = _invoiceService.Update(invoiceDetail);

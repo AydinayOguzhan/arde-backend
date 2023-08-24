@@ -11,7 +11,7 @@ namespace Business.Abstract
     public interface IInvoiceProductService
     {
         void Add(InvoiceProduct invoiceProduct);
-        void Delete(int invoiceProductId);
+        //void Delete(int invoiceProductId);
         void Delete(InvoiceProduct invoiceProduct);
         void DeleteAllByInvoiceId(int invoiceId);
         IDataResult<IList<InvoiceProduct>> GetAllByInvoiceId(int invoiceId);

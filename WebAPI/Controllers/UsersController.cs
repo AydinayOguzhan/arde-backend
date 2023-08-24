@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,22 @@ namespace arde_backend.Controllers
         }
 
         [HttpGet("getbymail")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetByMail(string email)
         {
             var result = _userService.GetByMail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getall")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetAll()
+        {
+            var result = _userService.GetAll();
             if (result.Success)
             {
                 return Ok(result);

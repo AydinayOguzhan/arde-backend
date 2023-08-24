@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -21,16 +23,17 @@ namespace Business.Concrete
             _invoiceProductDal = invoiceProductDal;
         }
 
+        [ValidationAspect(typeof(InvoiceProductValidator))]
         public void Add(InvoiceProduct invoiceProduct)
         {
             _invoiceProductDal.Add(invoiceProduct);
         }
 
-        public void Delete(int invoiceProductId)
-        {
-            var invoiceProduct = _invoiceProductDal.Get(i => i.Id == invoiceProductId);
-            _invoiceProductDal.Delete(invoiceProduct);
-        }
+        //public void Delete(int invoiceProductId)
+        //{
+        //    var invoiceProduct = _invoiceProductDal.Get(i => i.Id == invoiceProductId);
+        //    _invoiceProductDal.Delete(invoiceProduct);
+        //}
 
         public void Delete(InvoiceProduct invoiceProduct)
         {

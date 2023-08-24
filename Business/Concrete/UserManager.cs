@@ -6,6 +6,7 @@ using Core.Entities.Concrete;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,11 @@ namespace Business.Concrete
         public void Add(User user)
         {
             _userDal.Add(user);
+        }
+
+        public IDataResult<IList<InvoiceUserDto>> GetAll()
+        {
+            return new SuccessDataResult<IList<InvoiceUserDto>>(_userDal.GetAllUsers());
         }
 
         public IDataResult<User> GetByMail(string email)

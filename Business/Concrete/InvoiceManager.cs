@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -26,15 +28,16 @@ namespace Business.Concrete
             _invoiceProductService = invoiceProductService;
         }
 
+        [ValidationAspect(typeof(InvoiceValidator))]
         public IResult Add(InvoiceAddDto invoiceDetail)
         {
-            var currency = _currencyService.GetByName(invoiceDetail.Currency);
+            //var currency = _currencyService.GetByName(invoiceDetail.Currency);
             Invoice invoice = new Invoice
             {
                 InvoiceNo = invoiceDetail.InvoiceNo,
                 Address = invoiceDetail.Address,
                 CreatedDate = invoiceDetail.CreatedDate,
-                CurrencyId = currency.Data.Id,
+                CurrencyId = Convert.ToInt32(invoiceDetail.Currency),
                 CreatedBy = invoiceDetail.CreatedBy,
                 CustomerNo = invoiceDetail.CustomerId
             };
@@ -62,6 +65,8 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.InvoiceNotFound);
             }
+            _invoiceDal.Delete(invoiceResult);
+            
             var invoiceProducts = _invoiceProductService.GetAllByInvoiceId(invoiceId);
             foreach (var invoiceProduct in invoiceProducts.Data)
             {

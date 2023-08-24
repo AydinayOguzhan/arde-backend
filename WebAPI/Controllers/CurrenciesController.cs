@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,7 @@ namespace arde_backend.Controllers
         }
 
         [HttpGet("getall")]
+        [Authorize(Roles = "admin")]
         public IActionResult GetAll()
         {
             var result = _currencyService.GetAll();

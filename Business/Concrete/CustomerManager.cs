@@ -20,7 +20,6 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
-        //[SecuredOperation("user")]
         public IDataResult<IList<Customer>> GetAll()
         {
             return new SuccessDataResult<IList<Customer>>(_customerDal.GetList());

@@ -27,6 +27,8 @@ namespace DataAccess.Concrete.EntityFramework
                                  on invoice.CustomerNo equals customer.Id
                               join currency in context.Currencies
                                  on invoice.CurrencyId equals currency.Id
+                              join user in context.Users
+                                 on invoice.CreatedBy equals user.Id
                               where invoice.Id == invoiceId
                               select new InvoiceDetailDto
                               {
@@ -35,7 +37,7 @@ namespace DataAccess.Concrete.EntityFramework
                                   Address = invoice.Address,
                                   CreatedDate = invoice.CreatedDate,
                                   Currency = currency.Name,
-                                  CreatedBy = context.Users.FirstOrDefault(u => u.Id == invoice.CreatedBy),
+                                  CreatedBy = new InvoiceUserDto { UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, UserEmail = user.Email },
                                   Customer = context.Customers.FirstOrDefault(c => c.Id == invoice.CustomerNo),
                                   Products = (from invoiceProduct in context.InvoiceProducts
                                               where invoiceProduct.InvoiceId == invoice.Id

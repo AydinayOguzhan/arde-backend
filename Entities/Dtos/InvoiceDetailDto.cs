@@ -16,8 +16,9 @@ namespace Entities.Dtos
         public string Address { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Currency { get; set; }
+        public InvoiceUserDto CreatedBy { get; set; }
 
-        public User CreatedBy { get; set; }
+
         public Customer Customer { get; set; }
         public List<InvoiceProductDetailsDto> Products { get; set; }
     }
